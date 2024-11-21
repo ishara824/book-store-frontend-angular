@@ -1,0 +1,63 @@
+
+
+  
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" routerLink="/author-dashboard">Book Store</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="viewBook" routerLink="/author-books">View Books</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="addBook" routerLink="/add-book">Add Book</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-danger" href="#" id="logout" (click)="logout()">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  
+    <!-- Main Content -->
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Add a New Book</h1>
+    
+        <!-- Add Book Form -->
+        <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="title" class="form-label">Book Title</label>
+            <input type="text" id="title" class="form-control" placeholder="Enter book title" formControlName="title">
+          </div>
+    
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea id="description" class="form-control" rows="3" placeholder="Enter book description" formControlName="description"></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label for="description" class="form-label">Cover Image</label>
+            <input type="file" formControlName="coverImage" class="form-control" (change)="onFileSelected($event)" accept="image/*">
+                <div *ngIf="bookForm.get('coverImage')?.errors?.['invalidExtension']" class="text-danger">
+                    Invalid file extension. Allowed extensions: jpg, jpeg, png.
+                </div>
+                <div *ngIf="bookForm.get('coverImage')?.invalid && submitted" class="text-danger">
+                  Valid file is required.
+                </div>
+          </div>
+    
+          <button type="submit" class="btn btn-primary" [disabled]="isButtonDisabled">Add Book</button>
+        </form>
+    </div>
+  
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3">
+      <p>&copy; 2024 Book Store. All rights reserved.</p>
+    </footer>
+  </body>

@@ -1,0 +1,56 @@
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Book Store</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="btn btn-outline-light me-2" routerLink="/login">Login</a>
+            </li>
+            <li class="nav-item">
+              <button class="btn btn-outline-light" routerLink="/register">Register</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  
+    <!-- Main Section -->
+    <div class="container my-5">
+      <h1 class="text-center mb-4">Welcome to the Book Store</h1>
+  
+      <!-- Search Bar -->
+      <div class="row mb-4">
+        <div class="col-md-6 offset-md-3">
+          <div class="input-group">
+            <input type="text" id="searchBar" class="form-control" placeholder="Search for books by title or author" aria-label="Search" [(ngModel)]="keyword">
+            <button class="btn btn-primary" (click)="searchBooks()">Search</button>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Books Section -->
+      <div id="booksSection" class="row">
+        <!-- Example Book Cards -->
+        <div class="col-md-4 mb-4" *ngFor="let book of books;index as i">
+          <div class="card">
+            <img src="{{ book.cover_image_url ?? 'https://via.placeholder.com/150' }}" class="card-img-top" alt="Book Cover">
+            <div class="card-body">
+              <h5 class="card-title">{{book.title}}</h5>
+              <p class="card-text">Author: {{book.author.name}}</p>
+              <p class="card-text">Description: {{book.description}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3">
+      <p>&copy; 2024 Book Store. All rights reserved.</p>
+    </footer>
+  </body>
